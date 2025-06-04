@@ -1,0 +1,9 @@
+On the table, there are three stacks of white rectangular blocks, each with numbers on their visible sides. From left to right:
+
+1. The leftmost stack has four blocks, arranged vertically with the numbers 7, 8, 9, and 10 visible from top to bottom. The blocks are aligned in such a way that their edges form a straight vertical line.
+
+2. The middle stack has three blocks, also arranged vertically with the numbers 4, 5, and 6 visible from top to bottom. Like the first stack, these blocks are aligned to form a straight vertical line.
+
+3. The rightmost stack has three blocks, with the numbers 1, 2, and 3 visible from top to bottom. These blocks are also aligned to form a straight vertical line.
+
+The stacks are spaced out across the table, with the middle stack being centered between the left and right stacks. The table itself appears to be in a workshop or lab environment, as indicated by the machinery and tools in the background. The perspective of the photo is from above the table, looking down at the stacks of blocks.
