@@ -24,5 +24,5 @@
     (and
       (on-table b3 t3)
       (on b4 b3)
-      (on-table b2 t4)
-      (on b1 b2))))
+      (on-table b1 t4)
+      (on b2 b1))))

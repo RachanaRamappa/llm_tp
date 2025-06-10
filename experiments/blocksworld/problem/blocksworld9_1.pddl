@@ -28,9 +28,9 @@
   )
   (:goal
     (and
-      (on-table b9 t2)
-      (on b8 b9)
-      (on b7 b8)
+      (on-table b8 t2)
+      (on b9 b8)
+      (on b7 b9)
       (on-table b5 t5)
       (on b4 b5)
       (on b6 b4)

@@ -23,9 +23,9 @@
   )
   (:goal
     (and
-      (on-table b6 t6)
-      (on b5 b6)
-      (on-table b4 t4)
-      (on b3 b4)
+      (on-table b5 t6)
+      (on b6 b5)
+      (on-table b3 t4)
+      (on b4 b3)
       (on-table b1 t2)
       (on b2 b1))))

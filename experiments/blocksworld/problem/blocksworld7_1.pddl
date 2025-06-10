@@ -31,5 +31,5 @@
       (on b7 b6)
       (on-table b4 t5)
       (on b3 b4)
-      (on-table b2 t6)
-      (on b1 b2))))
+      (on-table b1 t6)
+      (on b2 b1))))

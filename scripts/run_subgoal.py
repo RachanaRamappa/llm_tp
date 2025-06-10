@@ -82,7 +82,7 @@ def run(model, max_tokens, domain, algorithm, temperature, fd_planner, p_num, p_
                 summary_file.write(summary_str)
                 print(summary_str)
 
-                for prob_idx, _, success, _ in result_list:
+                for prob_idx, _, success in result_list:
                     status = "Success" if success else "Failure"
                     problem_str = f"Problem {prob_idx}: {status}\n"
                     summary_file.write(problem_str)
