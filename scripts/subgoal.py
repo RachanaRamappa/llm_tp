@@ -3,11 +3,11 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from utils import prompts, llm_functions as llm
-import tree_generation as tg
+from scripts import tree_generation as tg
 from scripts import mcts
 import pddlpy
 import time
-import symbolic as sym
+from scripts import symbolic as sym
 import re
 from collections import defaultdict
 
@@ -109,8 +109,8 @@ def connect_trees(trees):
 
 
 def solve_symbolic_llm(domprob, domain, model, prob_size, prob_idx, subgoals, planner, plan_f, path):
-    domain_f = f"../domains/domain_{domain}.pddl"
-    problem_f = f"../experiments/{domain}/problem/{domain}{prob_size}_{prob_idx}.pddl"
+    domain_f = f"domains/domain_{domain}.pddl"
+    problem_f = f"experiments/{domain}/problem/{domain}{prob_size}_{prob_idx}.pddl"
 
     # read original initial state from problem file
     with open(problem_f, 'r') as file:
@@ -189,7 +189,10 @@ def solve_symbolic_llm(domprob, domain, model, prob_size, prob_idx, subgoals, pl
 def solve_mcts_llm(domprob, domain, model, plan_f, plan_number, prob_size, prob_idx, subgoals, max_tokens, temperature):
     domain_f = f"../domains/domain_{domain}.pddl"
     problem_f = f"../experiments/{domain}/problem/{domain}{prob_size}_{prob_idx}.pddl"
+   
 
+    print(f"using model: {model}, plan_number: {plan_number}, prob_size: {prob_size}, prob_idx: {prob_idx}, subgoals: {subgoals}")
+    
     with open(problem_f, 'r') as file:
         pddl_content = file.read()
 

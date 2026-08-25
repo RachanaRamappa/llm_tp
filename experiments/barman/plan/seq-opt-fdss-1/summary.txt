@@ -1,0 +1,134 @@
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.5645 seconds
+
+Average planning time for problem size 2 (successful only): 0.5645 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 1.0079 seconds
+
+Average planning time for problem size 2 (successful only): 1.0079 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.6653 seconds
+
+Average planning time for problem size 2 (successful only): 0.6653 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.5767 seconds
+
+Average planning time for problem size 2 (successful only): 0.5767 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.5726 seconds
+
+Average planning time for problem size 2 (successful only): 0.5726 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.6191 seconds
+
+Average planning time for problem size 2 (successful only): 0.6191 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.5755 seconds
+
+Average planning time for problem size 2 (successful only): 0.5755 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.5785 seconds
+
+Average planning time for problem size 2 (successful only): 0.5785 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.5846 seconds
+
+Average planning time for problem size 2 (successful only): 0.5846 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.5844 seconds
+
+Average planning time for problem size 2 (successful only): 0.5844 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 2.0695 seconds
+
+Average planning time for problem size 2 (successful only): 2.0695 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 1.0621 seconds
+
+Average planning time for problem size 2 (successful only): 1.0621 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.8840 seconds
+
+Average planning time for problem size 2 (successful only): 0.8840 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 17.5128 seconds
+
+Average planning time for problem size 3 (successful only): 17.5128 seconds
+Problem Size: 4, Problem Index: 1 - Failed
+No successful plans for problem size 4
+
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.8771 seconds
+
+Average planning time for problem size 2 (successful only): 0.8771 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 17.6945 seconds
+
+Average planning time for problem size 3 (successful only): 17.6945 seconds
+Problem Size: 2, Problem Index: 1 - Failed
+No successful plans for problem size 2
+
+Problem Size: 3, Problem Index: 1 - Failed
+No successful plans for problem size 3
+
+Problem Size: 4, Problem Index: 1 - Failed
+No successful plans for problem size 4
+
+Problem Size: 5, Problem Index: 1 - Failed
+No successful plans for problem size 5
+
+Problem Size: 6, Problem Index: 1 - Failed
+No successful plans for problem size 6
+
+Problem Size: 7, Problem Index: 1 - Failed
+No successful plans for problem size 7
+
+Problem Size: 8, Problem Index: 1 - Failed
+No successful plans for problem size 8
+
+Problem Size: 9, Problem Index: 1 - Failed
+No successful plans for problem size 9
+
+Problem Size: 10, Problem Index: 1 - Failed
+No successful plans for problem size 10
+
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 1.0067 seconds
+
+Average planning time for problem size 2 (successful only): 1.0067 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 17.5043 seconds
+
+Average planning time for problem size 3 (successful only): 17.5043 seconds
+Problem Size: 4, Problem Index: 1 - Failed
+No successful plans for problem size 4
+
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.8774 seconds
+
+Average planning time for problem size 2 (successful only): 0.8774 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 17.3362 seconds
+
+Average planning time for problem size 3 (successful only): 17.3362 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 1.0310 seconds
+
+Average planning time for problem size 2 (successful only): 1.0310 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 17.5839 seconds
+
+Average planning time for problem size 3 (successful only): 17.5839 seconds
+Problem Size: 4, Problem Index: 1 - Failed
+No successful plans for problem size 4
+
+Problem Size: 5, Problem Index: 1 - Failed
+No successful plans for problem size 5
+
+Problem Size: 2, Problem Index: 1 - Failed
+No successful plans for problem size 2
+
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.8641 seconds
+
+Average planning time for problem size 2 (successful only): 0.8641 seconds

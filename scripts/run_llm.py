@@ -41,8 +41,12 @@ def cot(model, domain, problem, temperature):
     )
 
     completion = llm.get_session_completion(chat_history, model=model, max_tokens=4096, temperature=temperature, logprobs=False)
+    print("===== QWEN RESPONSE OBJECT =====")
+    print(completion)
+    print("===== QWEN CONTENT =====")
+    print(repr(completion["choices"][0]["message"]["content"]))
+    print("================================")
     response_text = completion["choices"][0]['message']["content"].strip()
-
     return response_text
 
 
@@ -117,13 +121,13 @@ def run(model, max_tokens, domain, algorithm, temperature, p_num, p_size, p_idx)
 def main():
     '''
     example
-    run("gpt-4o", 4096, "barman", "cot", 0.0, [1], range(2, 11), [1])
-    run("gpt-4o", 4096, "blocksworld", "cot", 0.0, [1], range(3, 11), [1])
-    run("gpt-4o", 4096, "gripper", "cot", 0.0, [1], range(2, 11), [1])
+   run("qwen3:8b", 4096, "barman", "cot", 0.0, [1], range(2, 11), [1])
+   run("qwen3:8b", 4096, "blocksworld", "cot", 0.0, [1], range(3, 11), [1])
+   run("qwen3:8b", 4096, "gripper", "cot", 0.0, [1], range(2, 11), [1])
     '''
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, required=True, default="gpt-4o", help="Name of gpt model")
+    parser.add_argument("--model", type=str, required=True, default="qwen3:8b", help="Name of LLM model")
     parser.add_argument("--domain", type=str, required=True, choices=["barman", "blocksworld", "gripper"], help="Name of PDDL domain")
     parser.add_argument("--temperature", type=float, required=True, default=0.0, help="temparature of llm")
     parser.add_argument("--sizes", type=int, nargs="+", default=list(range(3, 11)),

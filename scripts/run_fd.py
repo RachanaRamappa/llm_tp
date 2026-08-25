@@ -20,8 +20,7 @@ def run_fd(domain, planner, p_size, p_idx, path):
                 domain_f = f"../domains/domain_{domain}.pddl"
                 problem_f = f"../experiments/{domain}/problem/{domain}{prob_size}_{prob_idx}.pddl"
                 fd_sas_f = f"../experiments/{domain}/plan/{planner}/{domain}{prob_size}_{prob_idx}.pddl.sas"
-                fd_plan_f = f"../experiments/{domain}/plan/{planner}/{domain}{prob_size}_{prob_idx}.pddl"
-
+                fd_plan_f = f"../experiments/{domain}/plan/{planner}/{domain}{prob_size}_{prob_idx}.plan"
                 success, plan, output, planning_time = sym.fd_planner(fd_plan_f, fd_sas_f, domain_f, problem_f, planner, path)
 
                 if success:

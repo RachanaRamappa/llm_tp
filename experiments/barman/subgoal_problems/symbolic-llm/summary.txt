@@ -1,0 +1,165 @@
+Problem size: 2, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 3, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 4, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 5, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 6, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 7, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 8, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 9, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 10, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 4, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 4, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 4, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 4, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 4, Plan number: 1
+Average planning time: 8.0152 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 2, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 3, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 4, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 5, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 6, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 7, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 8, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 9, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 10, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 3, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 3, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 3, Plan number: 1
+Average planning time: 3.1513 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 4, Plan number: 1
+Average planning time: 0.0000 seconds
+Success rate: 0.0000%
+Problem 1: Failure
+
+Problem size: 3, Plan number: 1
+Average planning time: 2.7333 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 3, Plan number: 1
+Average planning time: 2.8707 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 4, Plan number: 1
+Average planning time: 7.7150 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 2, Plan number: 1
+Average planning time: 0.9021 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 5, Plan number: 1
+Average planning time: 22.9846 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 3, Plan number: 1
+Average planning time: 2.6239 seconds
+Success rate: 100.0000%
+Problem 1: Success
+

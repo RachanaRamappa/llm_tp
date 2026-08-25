@@ -1,48 +1,150 @@
 import argparse
+from email import parser
+import os
 
+
+# ============================================================
+# COMMON PATH HELPERS
+# ============================================================
+
+def get_project_root():
+    """
+    Return the root directory of the llm_tp project.
+
+    prompts.py is expected to be inside:
+        llm_tp/utils/prompts.py
+
+    Therefore:
+        dirname(__file__) -> llm_tp/utils
+        ..                -> llm_tp
+    """
+    return os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..")
+    )
+
+
+def read_file(project_root, relative_path):
+    """
+    Read a file using a path relative to the project root.
+    """
+    file_path = os.path.join(project_root, relative_path)
+
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(
+            f"\nFile not found:\n"
+            f"  {file_path}\n"
+            f"\nProject root detected as:\n"
+            f"  {project_root}\n"
+        )
+
+    with open(file_path, "r") as f:
+        return f.read()
+
+
+# ============================================================
+# BARMAN
+# ============================================================
 
 def get_barman_args(K):
     parser = argparse.ArgumentParser()
 
-    with open("../domains/domain_barman.pddl", "r") as f:
-        domain = f.read()
-    with open("../experiments/barman/problem/barman_context_1.pddl", "r") as f:
-        problem_context_1 = f.read()
-    with open("../experiments/barman/problem/barman_context_2.pddl", "r") as f:
-        problem_context_2 = f.read()
-    with open("../experiments/barman/plan/barman_context_1.pddl", "r") as f:
-        plan_context_1 = f.read()
-    with open("../experiments/barman/plan/barman_context_2.pddl", "r") as f:
-        plan_context_2 = f.read()
-    with open("../experiments/barman/plan/barman_context_1_1.pddl", "r") as f:
-        plan_context_1_1 = f.read()
-    with open("../experiments/barman/plan/barman_context_2_2.pddl", "r") as f:
-        plan_context_2_2 = f.read()
-    with open("../experiments/barman/plan/barman_context_2_3.pddl", "r") as f:
-        plan_context_2_3 = f.read()
-    with open("../experiments/barman/problem/barman_subgoal_3_1.pddl", "r") as f:
-        problem_subgoal_3_1 = f.read()
-    with open("../experiments/barman/problem/barman_subgoal_3_2.pddl", "r") as f:
-        problem_subgoal_3_2 = f.read()
-    with open("../experiments/barman/problem/barman_subgoal_3_3.pddl", "r") as f:
-        problem_subgoal_3_3 = f.read()
-    with open("../experiments/barman/plan/barman_subgoal_3_1.pddl", "r") as f:
-        plan_subgoal_3_1 = f.read()
-    with open("../experiments/barman/plan/barman_subgoal_3_2.pddl", "r") as f:
-        plan_subgoal_3_2 = f.read()
-    with open("../experiments/barman/plan/barman_subgoal_3_3.pddl", "r") as f:
-        plan_subgoal_3_3 = f.read()
-    with open("../experiments/barman/plan/barman_subgoal_3_2_1.pddl", "r") as f:
-        plan_subgoal_3_2_1 = f.read()
-    with open("../experiments/barman/plan/barman_subgoal_3_3_1.pddl", "r") as f:
-        plan_subgoal_3_3_1 = f.read()
+    project_root = get_project_root()
 
+    # --------------------------------------------------------
+    # Domain
+    # --------------------------------------------------------
 
-    parser.add_argument("--domain", type=str, default=domain)
-    parser.add_argument("--problem_context_1", type=str, default=problem_context_1)
-    parser.add_argument("--problem_context_2", type=str, default=problem_context_2)
-    parser.add_argument("--plan_context_1", type=str, default=plan_context_1)
-    parser.add_argument("--plan_context_2", type=str, default=plan_context_2)
+    domain = read_file(
+        project_root,
+        "domains/domain_barman.pddl"
+    )
+
+    # --------------------------------------------------------
+    # Problem files
+    # --------------------------------------------------------
+
+    problem_context_1 = read_file(
+        project_root,
+        "experiments/barman/problem/barman_context_1.pddl"
+    )
+
+    problem_context_2 = read_file(
+        project_root,
+        "experiments/barman/problem/barman_context_2.pddl"
+    )
+
+    problem_subgoal_3_1 = read_file(
+        project_root,
+        "experiments/barman/problem/barman_subgoal_3_1.pddl"
+    )
+
+    problem_subgoal_3_2 = read_file(
+        project_root,
+        "experiments/barman/problem/barman_subgoal_3_2.pddl"
+    )
+
+    problem_subgoal_3_3 = read_file(
+        project_root,
+        "experiments/barman/problem/barman_subgoal_3_3.pddl"
+    )
+
+    # --------------------------------------------------------
+    # Plan files
+    # --------------------------------------------------------
+
+    plan_context_1 = read_file(
+        project_root,
+        "experiments/barman/plan/barman_context_1.pddl"
+    )
+
+    plan_context_2 = read_file(
+        project_root,
+        "experiments/barman/plan/barman_context_2.pddl"
+    )
+
+    plan_context_1_1 = read_file(
+        project_root,
+        "experiments/barman/plan/barman_context_1_1.pddl"
+    )
+
+    plan_context_2_2 = read_file(
+        project_root,
+        "experiments/barman/plan/barman_context_2_2.pddl"
+    )
+
+    plan_context_2_3 = read_file(
+        project_root,
+        "experiments/barman/plan/barman_context_2_3.pddl"
+    )
+
+    plan_subgoal_3_1 = read_file(
+        project_root,
+        "experiments/barman/plan/barman_subgoal_3_1.pddl"
+    )
+
+    plan_subgoal_3_2 = read_file(
+        project_root,
+        "experiments/barman/plan/barman_subgoal_3_2.pddl"
+    )
+
+    plan_subgoal_3_3 = read_file(
+        project_root,
+        "experiments/barman/plan/barman_subgoal_3_3.pddl"
+    )
+
+    plan_subgoal_3_2_1 = read_file(
+        project_root,
+        "experiments/barman/plan/barman_subgoal_3_2_1.pddl"
+    )
+
+    plan_subgoal_3_3_1 = read_file(
+        project_root,
+        "experiments/barman/plan/barman_subgoal_3_3_1.pddl"
+    )
+
+    # --------------------------------------------------------
+    # COT PROMPT
+    # --------------------------------------------------------
 
     cot_prompt = f''' 
     You are a helpful assistant confident in PDDL planning.
@@ -60,161 +162,187 @@ def get_barman_args(K):
     When preparing cocktail, grasp a shot with largest index. 
     For example, when there are 9 shots (shot1 to shot9), then always use shot9. When there are 10 shots (shot1 to shot10), then always use shot10. When there are 11 shots (shot1 to shot11), then always use shot11. 
 
-    Domain PDDL:
-    {domain}
+Domain PDDL:
+{domain}
 
-    Example 1
-    Problem PDDL: 
-    \n{problem_context_1}\n
+Rules:
+When preparing cocktail, grasp a shot with largest index.
 
-    Thoughts:
-    1. To prepare cocktail, grasp a shot with largest index.
-    2. Prepare first ingredient
-    3. Clean the shot
-    4. Prepare second ingredient
-    5. Leave the shot and grasp shaker
-    6. Shake the ingredients and pour the cocktail
- 
-    Plan PDDL:
-    {plan_context_1_1}
+For example:
+- when there are 9 shots (shot1 to shot9), always use shot9.
+- when there are 10 shots (shot1 to shot10), always use shot10.
+- when there are 11 shots (shot1 to shot11), always use shot11.
+
+Example 1
+
+Problem PDDL:
+{problem_context_1}
+
+Thoughts:
+1. To prepare cocktail, grasp a shot with largest index.
+2. Prepare first ingredient.
+3. Clean the shot.
+4. Prepare second ingredient.
+5. Leave the shot and grasp shaker.
+6. Shake the ingredients and pour the cocktail.
+
+Plan PDDL:
+{plan_context_1_1}
 
 
-    Example 2
-    Problem PDDL: 
-    {problem_context_2}
+Example 2
 
-    Thoughts:
-    1. Prepare the first cocktail as in Example 1.
-    2. Before preparing the second cocktail, empty, clean, and leave the shaker.
-    3. Prepare the second cocktail.
-    1) If the shot already contains the first ingredient, prepare the first ingredient immediately.
-    2) Else, clean the second ingredient of previous cocktail from the shot, and then prepare the first ingredient of current cocktail. 
+Problem PDDL:
+{problem_context_2}
 
-    Plan PDDL:
-    {plan_context_2_2}
-    '''
+Thoughts:
+1. Prepare the first cocktail as in Example 1.
+2. Before preparing the second cocktail, empty, clean, and leave the shaker.
+3. Prepare the second cocktail.
+4. If the shot already contains the first ingredient,
+   prepare the first ingredient immediately.
+5. Otherwise, clean the second ingredient of the previous
+   cocktail from the shot, and then prepare the first ingredient
+   of the current cocktail.
+
+Plan PDDL:
+{plan_context_2_2}
+'''
+
+    # --------------------------------------------------------
+    # SUBGOAL PROMPT
+    # --------------------------------------------------------
 
     subgoal_prompt = f'''
-    You are a helpful assistant generating PDDL subgoals.  
-    Given a domain PDDL and a problem PDDL, generate subgoals in the from of PDDL goal state. 
-    Decide each subgoal by looking at how the problem is solved based on the plan example provided for another task, and breaking down the original goal state into multiple subgoals.
-    Create subgoals in the order they need to be achieved first.
-    Distinguish each subgoal as 'Subgoal 1:', 'Subgoal 2:', and so on.
-    ONLY return PDDL goal. Return nothing else.
-    
-    Domain PDDL:
-    {domain}
-        
-    Example Problem PDDL 1:
-    {plan_context_2}
-    
-    The following steps are needed to achieve the given goal state:
-    {plan_context_2_3}
-    
-    Example subgoals
-    Subgoal 1:
-    (:goal (and (contains shot2 cocktail1)))
-    
-    Subgoal 2:
-    (:goal (and (contains shot1 cocktail2)))
-    '''
+You are a helpful assistant generating PDDL subgoals.
 
-    subgoal_mcts_prompt = f'''
-    You are a helpful assistant confident in PDDL planning.
-    Given a domain PDDL, a problem PDDL and several planning examples, generate {K} different plan PDDLs each starting with "Plan PDDL:"
-    Do not use quotation marks for code blocks, and do not start with expressions like 'plan'.
-    Return ONLY the plan PDDLs starting with "Plan PDDL:", NO other words or explanation. Return only the pddl, excluding comments.
-            
-    Each plan should be different with every previous plans. To generate various plans, differentiate the order of prepared ingredients.
-        
-    Follow the pattern of each examples below. 
-    Let's think step by step.
+Given a domain PDDL and a problem PDDL, generate subgoals
+in the form of PDDL goal states.
 
-    Domain PDDL:\n{domain}\n
-    
-    Rules:
-    When preparing cocktail, grasp a shot with largest index. 
-    For example, when there are 9 shots (shot1 to shot9), then always use shot9. When there are 10 shots (shot1 to shot10), then always use shot10. When there are 11 shots (shot1 to shot11), then always use shot11. 
+Decide each subgoal by looking at how the problem is solved
+based on the plan example provided for another task.
 
-    Example 1
-    Problem PDDL: 
-    \n{problem_subgoal_3_1}\n
+Break down the original goal state into multiple subgoals.
 
-    Thoughts:
-    1. To prepare cocktail, grasp a shot with largest index.
-    2. Prepare first ingredient
-    3. Clean the shot
-    4. Prepare second ingredient
-    5. Leave the shot and grasp shaker
-    6. Shake the ingredients and pour the cocktail
-    
-    Plan PDDL:
-    {plan_subgoal_3_1}
-    
+Create subgoals in the order they need to be achieved first.
 
-    Example 2
-    Problem PDDL: 
-    {problem_subgoal_3_2}
-    
-    Thoughts:
-    1. The shaker is shaked(not empty, not clean), so empty, clean and leave the shaker.
-    2. To prepare cocktail, grasp a shot with largest index.
-    3. Since shot4 is used with ingredient2, let's clean the shot first.
-    4. Prepare first ingredient
-    5. Clean the shot
-    6. Prepare second ingredient
-    7. Leave the shot and grasp shaker
-    8. Shake the ingredients and pour the cocktail
-    
-    Plan PDDL 1:
-    {plan_subgoal_3_2}
-    
-    Plan PDDL 2:
-    {plan_subgoal_3_2_1}
-    
-    
-    Example 3
-    Problem PDDL: 
-    {problem_subgoal_3_3}
-    
-    Thoughts:
-    1. The shaker is shaked(not empty, not clean), so empty, clean and leave the shaker.
-    2. To prepare cocktail, grasp a shot with largest index. 
-    3. Since shot4 is used with ingredient2, let's clean the shot first.
-    4. Prepare first ingredient
-    5. Clean the shot
-    6. Prepare second ingredient
-    7. Leave the shot and grasp shaker
-    8. Shake the ingredients and pour the cocktail
-    
-    Plan PDDL 1:
-    {plan_subgoal_3_3}
-    
-    Plan PDDL 2:
-    {plan_subgoal_3_3_1}
-    
-    '''
+Distinguish each subgoal as:
+Subgoal 1:
+Subgoal 2:
+and so on.
+
+ONLY return PDDL goals.
+Return nothing else.
+
+Domain PDDL:
+{domain}
+
+Example Problem PDDL:
+{plan_context_2}
+
+The following steps are needed to achieve the given goal state:
+{plan_context_2_3}
+
+Example subgoals:
+
+Subgoal 1:
+(:goal (and (contains shot2 cocktail1)))
+
+Subgoal 2:
+(:goal (and (contains shot1 cocktail2)))
+'''
+
+    # --------------------------------------------------------
+    # SUBGOAL MCTS PROMPT
+    # --------------------------------------------------------
+
+    subgoal_mcts_prompt = """
+You are a PDDL planning assistant for the Barman domain.
+
+Generate a valid sequence of grounded PDDL actions that transforms
+the CURRENT STATE into the GOAL STATE.
+
+IMPORTANT:
+
+1. Output ONLY actions.
+2. One complete action per line.
+3. Every action must be fully grounded.
+4. Use the exact object names given in the problem.
+5. Use the exact argument order shown below.
+6. Do not omit any arguments.
+7. Do not invent actions.
+8. Do not output predicates.
+9. Do not output states.
+10. Do not output explanations.
+11. Do not output comments.
+12. Do not output "Plan PDDL:".
+13. Every action must be applicable in the current state.
+14. Continue until the goal is achieved.
+
+VALID ACTION SIGNATURES:
+
+(grasp ?h ?c)
+
+(leave ?h ?c)
+
+(fill-shot ?s ?i ?h1 ?h2 ?d)
+
+(empty-shot ?h ?p ?b)
+
+(clean-shot ?s ?b ?h1 ?h2)
+
+(pour-shot-to-clean-shaker ?s ?i ?d ?h1 ?l ?l1)
+
+(pour-shot-to-used-shaker ?s ?i ?d ?h1 ?l ?l1)
+
+(empty-shaker ?h ?s ?b ?l ?l1)
+
+(clean-shaker ?h1 ?h2 ?s)
+
+(shake ?b ?d1 ?d2 ?s ?h1 ?h2)
+
+(pour-shaker-to-shot ?b ?d ?h ?s ?l ?l1)
+
+Return ONLY the grounded action sequence.
+"""
+
+    # --------------------------------------------------------
+    # MCTS PROMPT
+    # --------------------------------------------------------
 
     mcts_prompt = f'''
-    You are a helpful assistant confident in PDDL planning.
-    Given a domain PDDL, a problem PDDL and several planning examples, generate {K} different plan PDDLs each starting with "Plan PDDL:"
-    Do not use quotation marks for code blocks, and do not start with expressions like 'plan'.
-    Return ONLY the plan PDDLs starting with "Plan PDDL:", NO other words or explanation. Return only the pddl, excluding comments.
+You are a helpful assistant confident in PDDL planning.
 
-    Each plan should be different with every previous plans. To generate various plans, differentiate the order of prepared ingredients.
+Given a domain PDDL, a problem PDDL and several planning examples,
+generate {K} different plan PDDLs.
 
-    Follow the pattern of each examples below. 
-    Let's think step by step.
+Each plan must start with:
+Plan PDDL:
 
-    Domain PDDL:\n{domain}\n
+Do not use quotation marks for code blocks,
+and do not start with expressions like 'plan'.
 
-    Rules:
-    When preparing cocktail, grasp a shot with largest index. 
-    For example, when there are 9 shots (shot1 to shot9), then always use shot9. When there are 10 shots (shot1 to shot10), then always use shot10. When there are 11 shots (shot1 to shot11), then always use shot11. 
+Return ONLY the plan PDDLs starting with "Plan PDDL:".
 
-    Example 1
-    Problem PDDL: 
-    \n{problem_context_1}\n
+Return only the PDDL, excluding comments.
+
+Each plan should be different from every previous plan.
+
+To generate various plans, differentiate the order of
+prepared ingredients.
+
+Let's think step by step.
+
+Domain PDDL:
+{domain}
+
+Rules:
+When preparing cocktail, grasp a shot with largest index.
+
+Example 1
+
+Problem PDDL:
+{problem_context_1}
 
     Thoughts:
     1. To prepare cocktail, grasp a shot with largest index.
