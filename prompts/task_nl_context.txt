@@ -1,0 +1,4 @@
+Stack the blocks in new order.
+The left stack: b10, b8, b7, b9 from top to bottom
+The middle stack: b5, b4, b6 from top to bottom
+The right stack: b1, b2, b3 from top to bottom

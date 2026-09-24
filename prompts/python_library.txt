@@ -1,0 +1,41 @@
+Available Functions:
+rw.move_to_init_pose() - Moves the robot to a predefined start pose before picking up an object.
+rw.get_grasp_pose(object_name, bounding_box) - Takes a string as input indicating the name of an object of interest(blocks) and a bounding box of the object (with respect to world frame), and returns the grasp pose of the object and approach vector to the object.
+rw.pick_up_object(pose, approach) - Takes a grasp pose and approach vector of an object of interest, moves the robot arm to the safe pose, moves closer to the object in direction of approach vector, grabs it, and moves the object up to a safe distance of 15cm.
+rw.place_object(pose, basket) - Takes a pose which the object should have and the robot's object is basket or not, moves the robot arm so that the object can have the given pose and releases it. Note that the function assumes that the robot arm is holding an object.
+rw.detect_object(object_name) - Takes a string as input indicating the name of an object, and returns a bounding box of the object. This information will be returned for as many instances of the queried object in the environment. If there are multiple objects, call one function for each object. The unit is in metres.
+
+Environmental Setup:
+1. Pose means a list of 7 float64 type numbers indicating its position and orientation.
+   Position is X, Y, Z coordinates measured in meters and orientation is a quaternion. A pose has such form: [X,Y,Z,qx,qy,qz,qw]. qx,qy,qz,qw represents orientation quaternion.
+2. In terms of axis conventions, forward means positive Y axis, right means positive X axis, and up means positive Z axis.
+4. The table is divided into 6 sections: t1, t2, t3, t4, t5.
+   t1 is the left top section, t2 is the middle top, and t3 is the right top section.
+   t1 is the left bottom section, t2 is the middle bottom, and t3 is the right bottom section.
+   For the robot arm to place object on t1, robot arm should have pose [-0.40, -0.30, 0.79, 0.5, -0.5, -0.5, -0.5].
+   For the robot arm to place object on t2, robot arm should have pose [-0.40, -0.525, 0.79, 0.5, -0.5, -0.5, -0.5].
+   For the robot arm to place object on t3, robot arm should have pose [-0.40, -0.75, 0.79, 0.5, -0.5, -0.5, -0.5].
+   For the robot arm to place object on t4, robot arm should have pose [-0.65, -0.30, 0.79, 0.5, -0.5, -0.5, -0.5].
+   For the robot arm to place object on t5, robot arm should have pose [-0.65, -0.525, 0.79, 0.5, -0.5, -0.5, -0.5].
+   For the robot arm to place object on t6, robot arm should have pose [-0.65, -0.75, 0.79, 0.5, -0.5, -0.5, -0.5].
+   You can place only one object on each section. If you want to place a new object on the section which is already occupied with existing object, you should stack the new object on the existing object.
+   Table's area w.r.t world frame: -0.65 <= x <= -0.40, -0.75 <= y <= -0.30, z = 0.79
+5. You are to refer to these objects using exact names: block 1, block 2, block 3, etc. These blocks have a cube shape with a side length of 8cm.
+6. When placing an object, robot arm's orientation should be qx = -0.5, qy = 0.5, qz = 0.5, w = 0.5.
+7. When I ask questions about the objects around the robot, answer based on 'scene' content.
+
+Code Generation Rules:
+1. You don't have to import 'rw' library when you write the python code.
+2. You are only allowed to use the functions I have defined for you. You are not to use any other hypothetical functions that you think might exist.
+3. You are not to use variables you've defined in the other code. When you write a new code, you should define the variable again.
+4. You can use simple Python functions from libraries such as math and numpy.
+5. Every time before picking up an object, robot should get the grasp pose of the object. Every time before getting grasp pose of the object, you should newly get bounding box of the object using rw.detect_object() function.
+6. Do not use underbar for object names, and use single quote not double quote if you want to give object name to a predefined function.
+8. When translating 'putdown' action of the given plan PDDL, use rw.place_object() function. Put the objective pose as a parameter and set the parameter 'basket' to False.
+
+Physical Laws:
+1. You should always consider the current state of the physical world when interacting with objects. The current state of the physical world is based on the scene description that I provided and the codes you generated.
+2. For example, when others objects are stacked on the object of interest, then you should move other objects away and then move the object of interest. Always go from top to bottom of current scene.
+3. When stacking a block on bottom block, consider the size of bottom block and decide the pose of which top block should have.
+
+Are you ready?

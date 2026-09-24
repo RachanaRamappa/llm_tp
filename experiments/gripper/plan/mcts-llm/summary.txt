@@ -1,0 +1,35 @@
+Problem size: 2, Plan number: 3
+Average planning time: 42.4370 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 2, Plan number: 3
+Average planning time: 33.5991 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 2, Plan number: 3
+Average planning time: 2.3283 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 3, Plan number: 3
+Average planning time: 38.3317 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 4, Plan number: 5
+Average planning time: 37.3907 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 2, Plan number: 3
+Average planning time: 52.9754 seconds
+Success rate: 100.0000%
+Problem 1: Success
+
+Problem size: 2, Plan number: 3
+Average planning time: 52.2855 seconds
+Success rate: 100.0000%
+Problem 1: Success
+

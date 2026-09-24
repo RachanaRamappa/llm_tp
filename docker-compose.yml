@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  vllm-server:
+    image: llm-task-planner:latest
+    container_name: vllm-server
+    entrypoint: ["/app/bin/entrypoint.sh", "serve"]
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - model_cache:/model_cache
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+      - VLLM_WORKER_MULTIPROC_METHOD=spawn
+      - TRANSFORMERS_CACHE=/model_cache/huggingface
+      - TORCH_HOME=/model_cache/torch
+
+    shm_size: 16gb
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v1/models"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 120s
+
+  mcts-planner:
+    image: llm-task-planner:latest
+    container_name: mcts-planner
+    entrypoint: ["/app/bin/entrypoint.sh", "mcts"]
+
+    depends_on:
+      vllm-server:
+        condition: service_healthy
+
+    volumes:
+      - ./experiments:/app/experiments
+      - ./scripts:/app/scripts
+      - ./domains:/app/domains
+      - ./prompts:/app/prompts
+      - ./utils:/app/utils
+
+    environment:
+      - LLM_BASE_URL=http://vllm-server:8000/v1
+      - LLM_API_KEY=local-key
+      - LLM_MODEL=Qwen/Qwen3-32B
+      - MODEL_NAME=Qwen/Qwen3-32B
+      - DOMAIN=${DOMAIN:-barman}
+      - NS=${NS:-3 4 5}
+      - SIZES=${SIZES:-2 3 4 5}
+
+    stdin_open: true
+    tty: true
+
+volumes:
+  model_cache:
+    driver: local

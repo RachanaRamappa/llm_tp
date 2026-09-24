@@ -1,0 +1,213 @@
+INFO     planner time limit: None
+INFO     planner memory limit: None
+
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: None
+INFO     translator memory limit: None
+INFO     translator command line string: /opt/anaconda3/envs/llm_tp/bin/python -m fast_downward.translate /Users/rahulr/Documents/Research/llm_tp/domains/domain_barman.pddl /Users/rahulr/Documents/Research/llm_tp/experiments/barman/problem/barman4_1.pddl --sas-file output.sas
+Parsing...
+Parsing: [0.000s CPU, 0.002s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.000s wall-clock]
+Normalizing Datalog program...
+Normalizing Datalog program: [0.010s CPU, 0.006s wall-clock]
+Preparing model... [0.000s CPU, 0.005s wall-clock]
+Generated 116 rules.
+Computing model... [0.010s CPU, 0.005s wall-clock]
+763 relevant atoms
+854 auxiliary atoms
+1617 final queue length
+2734 total queue pushes
+Completing instantiation... [0.000s CPU, 0.011s wall-clock]
+Instantiating: [0.030s CPU, 0.031s wall-clock]
+Computing fact groups...
+Finding invariants...
+24 initial candidates
+Finding invariants: [0.000s CPU, 0.003s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+Instantiating groups... [0.000s CPU, 0.000s wall-clock]
+Collecting mutex groups... [0.000s CPU, 0.000s wall-clock]
+Choosing groups...
+77 uncovered facts
+Choosing groups: [0.000s CPU, 0.000s wall-clock]
+Building translation key... [0.000s CPU, 0.000s wall-clock]
+Computing fact groups: [0.000s CPU, 0.003s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.000s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.000s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.000s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.000s CPU, 0.000s wall-clock]
+Translator axioms removed by simplifying: 0
+Processing axioms: [0.000s CPU, 0.001s wall-clock]
+Translating task: [0.010s CPU, 0.009s wall-clock]
+824 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+0 operators removed
+0 axioms removed
+3 propositions removed
+Detecting unreachable propositions: [0.000s CPU, 0.004s wall-clock]
+Reordering and filtering variables...
+80 of 80 variables necessary.
+6 of 9 mutex groups necessary.
+478 of 478 operators necessary.
+0 of 0 axiom rules necessary.
+Reordering and filtering variables: [0.000s CPU, 0.003s wall-clock]
+Translator variables: 80
+Translator derived variables: 0
+Translator facts: 171
+Translator goal facts: 4
+Translator mutex groups: 6
+Translator total mutex groups size: 18
+Translator operators: 478
+Translator axioms: 0
+Translator task size: 4617
+warning: could not determine peak memory
+Writing output... [0.010s CPU, 0.003s wall-clock]
+Done! [0.050s CPU, 0.056s wall-clock]
+translate exit code: 0
+
+INFO     Running search (release).
+INFO     search stdin: output.sas
+INFO     search time limit: None
+INFO     search memory limit: None
+INFO     search command line string: /Users/rahulr/Documents/Research/downward/builds/release/bin/downward --search 'let(hff, ff(), lazy_greedy([hff], preferred=[hff]))' --internal-plan-file sas_plan < output.sas
+[t=0.000160s, 410074688 KB] Search code revision: 824499f8f
+[t=0.000173s, 410074688 KB] reading input...
+[t=0.006193s, 410205760 KB] done reading input!
+[t=0.007168s, 410205760 KB] Simplifying 1808 unary operators... done! [1520 unary operators]
+[t=0.008287s, 410205760 KB] time to simplify: 0.001121s
+[t=0.008347s, 410205760 KB] Initializing additive heuristic...
+[t=0.008352s, 410205760 KB] Initializing FF heuristic...
+[t=0.008363s, 410205760 KB] Building successor generator... done!
+[t=0.008557s, 410205760 KB] peak memory difference for successor generator creation: 0 KB
+[t=0.008561s, 410205760 KB] time for successor generation creation: 0.000185s
+[t=0.008566s, 410205760 KB] Variables: 80
+[t=0.008570s, 410205760 KB] FactPairs: 171
+[t=0.008575s, 410205760 KB] Bytes per state: 12
+[t=0.008585s, 410205760 KB] Conducting lazy best first search, (real) bound = 2147483647
+[t=0.008618s, 410205760 KB] New best heuristic value for ff: 16
+[t=0.008622s, 410205760 KB] g=0, 1 evaluated, 0 expanded
+[t=0.008631s, 410205760 KB] Initial heuristic value for ff: 16
+[t=0.009573s, 410205760 KB] New best heuristic value for ff: 15
+[t=0.009577s, 410205760 KB] g=3, 73 evaluated, 72 expanded
+[t=0.009608s, 410205760 KB] New best heuristic value for ff: 14
+[t=0.009611s, 410205760 KB] g=4, 75 evaluated, 74 expanded
+[t=0.009855s, 410205760 KB] New best heuristic value for ff: 13
+[t=0.009858s, 410205760 KB] g=7, 94 evaluated, 93 expanded
+[t=0.009888s, 410205760 KB] New best heuristic value for ff: 12
+[t=0.009891s, 410205760 KB] g=8, 96 evaluated, 95 expanded
+[t=0.009908s, 410205760 KB] New best heuristic value for ff: 11
+[t=0.009911s, 410205760 KB] g=9, 97 evaluated, 96 expanded
+[t=0.561269s, 410497600 KB] New best heuristic value for ff: 10
+[t=0.561294s, 410497600 KB] g=22, 42635 evaluated, 42598 expanded
+[t=0.561318s, 410497600 KB] New best heuristic value for ff: 9
+[t=0.561322s, 410497600 KB] g=23, 42636 evaluated, 42599 expanded
+[t=0.613859s, 410497600 KB] New best heuristic value for ff: 8
+[t=0.613892s, 410497600 KB] g=38, 46852 evaluated, 46785 expanded
+[t=0.613923s, 410497600 KB] New best heuristic value for ff: 7
+[t=0.613928s, 410497600 KB] g=39, 46854 evaluated, 46787 expanded
+[t=0.614004s, 410497600 KB] New best heuristic value for ff: 6
+[t=0.614007s, 410497600 KB] g=42, 46860 evaluated, 46793 expanded
+[t=0.614023s, 410497600 KB] New best heuristic value for ff: 5
+[t=0.614027s, 410497600 KB] g=43, 46861 evaluated, 46794 expanded
+[t=0.614040s, 410497600 KB] New best heuristic value for ff: 4
+[t=0.614044s, 410497600 KB] g=44, 46862 evaluated, 46795 expanded
+[t=0.619154s, 410497600 KB] New best heuristic value for ff: 3
+[t=0.619159s, 410497600 KB] g=63, 47302 evaluated, 47235 expanded
+[t=0.619181s, 410497600 KB] New best heuristic value for ff: 2
+[t=0.619185s, 410497600 KB] g=65, 47304 evaluated, 47237 expanded
+[t=0.619195s, 410497600 KB] New best heuristic value for ff: 1
+[t=0.619199s, 410497600 KB] g=66, 47305 evaluated, 47238 expanded
+[t=0.619207s, 410497600 KB] Solution found!
+[t=0.619214s, 410497600 KB] Actual search time: 0.610617s
+grasp right shot5 (1)
+fill-shot shot5 ingredient1 right left dispenser1 (1)
+pour-shot-to-clean-shaker shot5 ingredient1 shaker1 right l0 l1 (1)
+clean-shot shot5 ingredient1 right left (1)
+fill-shot shot5 ingredient2 right left dispenser2 (1)
+pour-shot-to-used-shaker shot5 ingredient2 shaker1 right l1 l2 (1)
+clean-shot shot5 ingredient2 right left (1)
+fill-shot shot5 ingredient3 right left dispenser3 (1)
+grasp left shaker1 (1)
+leave right shot5 (1)
+shake cocktail4 ingredient1 ingredient2 shaker1 left right (1)
+pour-shaker-to-shot cocktail4 shot4 left shaker1 l2 l1 (1)
+empty-shaker left shaker1 cocktail4 l1 l0 (1)
+clean-shaker left right shaker1 (1)
+grasp right shot5 (1)
+leave left shaker1 (1)
+pour-shot-to-clean-shaker shot5 ingredient3 shaker1 right l0 l1 (1)
+clean-shot shot5 ingredient3 right left (1)
+fill-shot shot5 ingredient1 right left dispenser1 (1)
+pour-shot-to-used-shaker shot5 ingredient1 shaker1 right l1 l2 (1)
+clean-shot shot5 ingredient1 right left (1)
+fill-shot shot5 ingredient2 right left dispenser2 (1)
+grasp left shaker1 (1)
+leave right shot5 (1)
+shake cocktail2 ingredient3 ingredient1 shaker1 left right (1)
+pour-shaker-to-shot cocktail2 shot2 left shaker1 l2 l1 (1)
+empty-shaker left shaker1 cocktail2 l1 l0 (1)
+leave left shaker1 (1)
+grasp right shot1 (1)
+fill-shot shot1 ingredient3 right left dispenser3 (1)
+grasp left shaker1 (1)
+leave right shot1 (1)
+clean-shaker left right shaker1 (1)
+grasp right shot1 (1)
+pour-shot-to-clean-shaker shot1 ingredient3 shaker1 right l0 l1 (1)
+leave left shaker1 (1)
+leave right shot1 (1)
+grasp left shot5 (1)
+grasp right shaker1 (1)
+leave left shot5 (1)
+grasp left shot1 (1)
+leave right shaker1 (1)
+clean-shot shot1 ingredient3 left right (1)
+fill-shot shot1 ingredient2 left right dispenser2 (1)
+pour-shot-to-used-shaker shot1 ingredient2 shaker1 left l1 l2 (1)
+clean-shot shot1 ingredient2 left right (1)
+grasp right shaker1 (1)
+leave left shot1 (1)
+shake cocktail1 ingredient3 ingredient2 shaker1 right left (1)
+pour-shaker-to-shot cocktail1 shot1 right shaker1 l2 l1 (1)
+empty-shaker right shaker1 cocktail1 l1 l0 (1)
+clean-shaker right left shaker1 (1)
+grasp left shot3 (1)
+leave right shaker1 (1)
+fill-shot shot3 ingredient3 left right dispenser3 (1)
+pour-shot-to-clean-shaker shot3 ingredient3 shaker1 left l0 l1 (1)
+leave left shot3 (1)
+grasp left shot5 (1)
+pour-shot-to-used-shaker shot5 ingredient2 shaker1 left l1 l2 (1)
+grasp right shaker1 (1)
+leave left shot5 (1)
+shake cocktail3 ingredient3 ingredient2 shaker1 right left (1)
+grasp left shot3 (1)
+leave right shaker1 (1)
+clean-shot shot3 ingredient3 left right (1)
+grasp right shaker1 (1)
+pour-shaker-to-shot cocktail3 shot3 right shaker1 l2 l1 (1)
+[t=0.619217s, 410497600 KB] Plan length: 67 step(s).
+[t=0.619217s, 410497600 KB] Plan cost: 67
+[t=0.619217s, 410497600 KB] Expanded 47239 state(s).
+[t=0.619217s, 410497600 KB] Reopened 0 state(s).
+[t=0.619217s, 410497600 KB] Evaluated 47306 state(s).
+[t=0.619217s, 410497600 KB] Evaluations: 47306
+[t=0.619217s, 410497600 KB] Generated 253070 state(s).
+[t=0.619217s, 410497600 KB] Dead ends: 66 state(s).
+[t=0.619217s, 410497600 KB] Number of registered states: 47306
+[t=0.619217s, 410497600 KB] Int hash set load factor: 47306/65536 = 0.721832
+[t=0.619217s, 410497600 KB] Int hash set resizes: 16
+[t=0.619217s, 410497600 KB] Search time: 0.610633s
+[t=0.619217s, 410497600 KB] Total time: 0.619217s
+Solution found.
+Peak memory: 410497600 KB
+Remove intermediate file output.sas
+search exit code: 0
+
+INFO     Planner time: 0.73s

@@ -1,0 +1,21 @@
+(unstack b1 b2)
+(putdown b1 t2)
+(unstack b3 b4)
+(putdown b3 t1)
+(pickup b2 t4)
+(putdown b2 t6)
+(pickup b4 t3)
+(putdown b4 t5)
+
+(pickup b3 t1)
+(putdown b3 t3)
+
+(pickup b4 t5)
+(stack b4 b3)
+
+(pickup b1 t2)
+(putdown b1 t4)
+
+(pickup b2 t6)
+(stack b2 b1)
+

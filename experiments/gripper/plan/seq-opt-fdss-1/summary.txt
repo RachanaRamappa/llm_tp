@@ -1,0 +1,101 @@
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.2443 seconds
+
+Average planning time for problem size 2 (successful only): 0.2443 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.1340 seconds
+
+Average planning time for problem size 2 (successful only): 0.1340 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 0.1812 seconds
+
+Average planning time for problem size 3 (successful only): 0.1812 seconds
+Problem Size: 4, Problem Index: 1 - Success
+Planning Time: 1.4501 seconds
+
+Average planning time for problem size 4 (successful only): 1.4501 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.1361 seconds
+
+Average planning time for problem size 2 (successful only): 0.1361 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 0.2180 seconds
+
+Average planning time for problem size 3 (successful only): 0.2180 seconds
+Problem Size: 4, Problem Index: 1 - Success
+Planning Time: 1.9023 seconds
+
+Average planning time for problem size 4 (successful only): 1.9023 seconds
+Problem Size: 5, Problem Index: 1 - Success
+Planning Time: 25.7354 seconds
+
+Average planning time for problem size 5 (successful only): 25.7354 seconds
+Problem Size: 6, Problem Index: 1 - Success
+Planning Time: 158.0822 seconds
+
+Average planning time for problem size 6 (successful only): 158.0822 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.1185 seconds
+
+Average planning time for problem size 2 (successful only): 0.1185 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 0.2132 seconds
+
+Average planning time for problem size 3 (successful only): 0.2132 seconds
+Problem Size: 4, Problem Index: 1 - Success
+Planning Time: 1.8890 seconds
+
+Average planning time for problem size 4 (successful only): 1.8890 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.1520 seconds
+
+Average planning time for problem size 2 (successful only): 0.1520 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 0.2158 seconds
+
+Average planning time for problem size 3 (successful only): 0.2158 seconds
+Problem Size: 4, Problem Index: 1 - Success
+Planning Time: 1.7630 seconds
+
+Average planning time for problem size 4 (successful only): 1.7630 seconds
+Problem Size: 5, Problem Index: 1 - Success
+Planning Time: 24.2577 seconds
+
+Average planning time for problem size 5 (successful only): 24.2577 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.1283 seconds
+
+Average planning time for problem size 2 (successful only): 0.1283 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 0.2140 seconds
+
+Average planning time for problem size 3 (successful only): 0.2140 seconds
+Problem Size: 4, Problem Index: 1 - Success
+Planning Time: 1.8949 seconds
+
+Average planning time for problem size 4 (successful only): 1.8949 seconds
+Problem Size: 5, Problem Index: 1 - Success
+Planning Time: 24.2964 seconds
+
+Average planning time for problem size 5 (successful only): 24.2964 seconds
+Problem Size: 6, Problem Index: 1 - Success
+Planning Time: 157.4759 seconds
+
+Average planning time for problem size 6 (successful only): 157.4759 seconds
+Problem Size: 7, Problem Index: 1 - Success
+Planning Time: 845.6406 seconds
+
+Average planning time for problem size 7 (successful only): 845.6406 seconds
+Problem Size: 8, Problem Index: 1 - Failed
+No successful plans for problem size 8
+
+Problem Size: 9, Problem Index: 1 - Failed
+No successful plans for problem size 9
+
+Problem Size: 10, Problem Index: 1 - Failed
+No successful plans for problem size 10
+
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.1548 seconds
+
+Average planning time for problem size 2 (successful only): 0.1548 seconds

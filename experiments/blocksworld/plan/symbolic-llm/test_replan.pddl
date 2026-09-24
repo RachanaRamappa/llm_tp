@@ -1,0 +1,5 @@
+(unstack b1 b2)
+(pickup b2 t3)
+(stack b2 b3)
+(unstack b1 b2)
+(stack b1 b2)
