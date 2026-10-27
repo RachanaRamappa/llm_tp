@@ -113,3 +113,11 @@ No successful plans for problem size 9
 Problem Size: 10, Problem Index: 1 - Failed
 No successful plans for problem size 10
 
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 0.1480 seconds
+
+Average planning time for problem size 3 (successful only): 0.1480 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 0.2377 seconds
+
+Average planning time for problem size 3 (successful only): 0.2377 seconds

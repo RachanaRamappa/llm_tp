@@ -1,8 +1,12 @@
 import sys
 import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.append(BASE_DIR)
+current_dir = os.path.abspath(os.path.dirname(__file__))
+if os.path.basename(current_dir) == "scripts":
+    BASE_DIR = os.path.abspath(os.path.join(current_dir, ".."))
+else:
+    BASE_DIR = current_dir
+sys.path.insert(0, BASE_DIR)
 
 import argparse
 import time
@@ -52,10 +56,27 @@ def run(
 
             for prob_idx in p_idx:
 
+                # Determine problem file path. Prefer the 'problem' subdirectory, fallback to flat layout.
                 problem_f = os.path.join(
                     BASE_DIR,
                     f"experiments/{domain}/problem/{domain}{prob_size}_{prob_idx}.pddl"
                 )
+                if not os.path.isfile(problem_f):
+                    # Try flat layout (files directly under domain folder)
+                    alt_path = os.path.join(
+                        BASE_DIR,
+                        f"experiments/{domain}/{domain}{prob_size}_{prob_idx}.pddl"
+                    )
+                    if os.path.isfile(alt_path):
+                        problem_f = alt_path
+                # Special handling for barman where files may have a '_context_' prefix.
+                if domain == "barman" and not os.path.isfile(problem_f):
+                    barman_alt = os.path.join(
+                        BASE_DIR,
+                        f"experiments/{domain}/{domain}_context_{prob_size}_{prob_idx}.pddl"
+                    )
+                    if os.path.isfile(barman_alt):
+                        problem_f = barman_alt
 
                 if not os.path.exists(problem_f):
                     print(
@@ -75,8 +96,9 @@ def run(
                 print(f"Domain          : {domain}")
                 print(f"Problem size    : {prob_size}")
                 print(f"Problem index   : {prob_idx}")
-                print(f"Model           : {model}")
                 print(f"Subgoal planner : {subgoal_planner}")
+                print(f"Backend         : {llm.get_active_backend() or 'default'}")
+                print(f"Model           : {model}")
                 print(f"Temperature     : {temperature}")
 
                 if planner:
@@ -390,7 +412,6 @@ def run(
 
 def main():
 
-    default_model = os.getenv("LLM_MODEL", llm.DEFAULT_MODEL)
     default_fd = os.getenv(
         "FD_PATH",
         os.path.abspath(os.path.join(BASE_DIR, "../downward/fast-downward.py"))
@@ -406,8 +427,23 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default=default_model,
-        help="LLM model name (e.g. Qwen/Qwen3-32B)"
+        default=None,
+        help="LLM model name (defaults to Ollama model for symbolic-llm, vLLM model for mcts-llm)"
+    )
+
+    parser.add_argument(
+        "--backend",
+        type=str,
+        default=None,
+        choices=["ollama", "vllm", "groq"],
+        help="LLM backend (defaults to ollama for symbolic-llm, vllm for mcts-llm)"
+    )
+
+    parser.add_argument(
+        "--base_url",
+        type=str,
+        default=None,
+        help="Custom LLM API base URL (e.g. http://localhost:11434/v1 or http://localhost:8000/v1)"
     )
 
     parser.add_argument(
@@ -488,8 +524,32 @@ def main():
 
     args = parser.parse_args()
 
+    # Determine backend: symbolic-llm defaults to ollama, mcts-llm defaults to vllm
+    backend = args.backend
+    if not backend:
+        if args.subgoal_planner == "symbolic-llm":
+            backend = "ollama"
+        elif args.subgoal_planner == "mcts-llm":
+            backend = "vllm"
+        else:
+            backend = "groq"
+
+    # Determine model based on backend if not explicitly provided
+    model = args.model
+    if not model:
+        if backend == "ollama":
+            model = llm.OLLAMA_MODEL
+        elif backend == "vllm":
+            model = llm.VLLM_MODEL
+        else:
+            model = llm.DEFAULT_MODEL
+
+    llm.set_active_backend(backend)
+    if args.base_url:
+        llm.set_active_base_url(args.base_url)
+
     run(
-        model=args.model,
+        model=model,
         max_tokens=4096,
         domain=args.domain,
         subgoal_planner=args.subgoal_planner,

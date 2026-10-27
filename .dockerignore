@@ -1,35 +1,60 @@
+# Git
 .git
 .github
 .gitignore
+
+# IDE
 .idea
 .vscode
+
+# Python cache
 __pycache__
 *.pyc
 *.pyo
 *.pyd
-*.so
 *.egg
 *.egg-info
-dist
-build
 .pytest_cache
 .hypothesis
 .tox
 .coverage
 htmlcov
+.cache
+
+# Virtual envs (DO NOT include in Docker image)
 .env
 .venv
 venv/
 env/
+.env.local
+.env.*.local
+
+# OS files
 .DS_Store
-*.log
-node_modules
 *.swp
 *.swo
 *~
-.cache
-.env.local
-.env.*.local
+
+# Logs
+*.log
 npm-debug.log
+
+# Archives
 *.tar.gz
 *.tar
+
+# Build artifacts
+dist
+build
+*.so
+
+# Node
+node_modules
+
+# Exported data (don't include in image)
+export/
+model_cache/
+results/
+
+# Backup files
+*.backup

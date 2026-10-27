@@ -203,3 +203,15 @@ No successful plans for problem size 5
 Problem Size: 6, Problem Index: 1 - Failed
 No successful plans for problem size 6
 
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.8229 seconds
+
+Average planning time for problem size 2 (successful only): 0.8229 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 17.0331 seconds
+
+Average planning time for problem size 3 (successful only): 17.0331 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 17.4523 seconds
+
+Average planning time for problem size 3 (successful only): 17.4523 seconds

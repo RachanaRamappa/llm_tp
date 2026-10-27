@@ -3,10 +3,17 @@ import sys
 import re
 from pathlib import Path
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.append(BASE_DIR)
+current_dir = os.path.abspath(os.path.dirname(__file__))
+if os.path.basename(current_dir) == "scripts":
+    BASE_DIR = os.path.abspath(os.path.join(current_dir, ".."))
+else:
+    BASE_DIR = current_dir
+sys.path.insert(0, BASE_DIR)
 
-from scripts import symbolic as sym
+try:
+    import symbolic as sym
+except ImportError:
+    from scripts import symbolic as sym
 
 
 def find_problem_file(domain, size, idx):

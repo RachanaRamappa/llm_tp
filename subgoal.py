@@ -38,6 +38,7 @@ def generate_subgoals(model, domain, problem, max_tokens, temperature=0.0):
     user_prompt = f'''
     Now we have a new problem defined in this domain
     Problem: {problem_content}
+    Output ONLY the (:goal ...) statements. Do not include thinking or explanations.
     Subgoals:
     '''
     chat_history.append(
@@ -125,7 +126,7 @@ def connect_trees(trees):
     return main_tree
 
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 def solve_symbolic_llm(domprob, domain, model, prob_size, prob_idx, subgoals, planner, plan_f, path):

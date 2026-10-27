@@ -9,7 +9,6 @@
 (shake cocktail1 ingredient2 ingredient1 shaker1 right left)
 (pour-shaker-to-shot cocktail1 shot1 right shaker1 l2 l1)
 ; cost = 10 (unit cost)
-
 (empty-shaker right shaker1 cocktail1 l1 l0)
 (clean-shaker right left shaker1)
 (grasp left shot2)
@@ -26,7 +25,6 @@
 (shake cocktail2 ingredient1 ingredient3 shaker1 right left)
 (pour-shaker-to-shot cocktail2 shot2 right shaker1 l2 l1)
 ; cost = 15 (unit cost)
-
 (empty-shaker right shaker1 cocktail2 l1 l0)
 (clean-shaker right left shaker1)
 (grasp left shot4)
@@ -41,7 +39,6 @@
 (shake cocktail3 ingredient3 ingredient2 shaker1 right left)
 (pour-shaker-to-shot cocktail3 shot3 right shaker1 l2 l1)
 ; cost = 13 (unit cost)
-
 (empty-shaker right shaker1 cocktail3 l1 l0)
 (clean-shaker right left shaker1)
 (grasp left shot4)
@@ -57,7 +54,6 @@
 (shake cocktail4 ingredient1 ingredient3 shaker1 right left)
 (pour-shaker-to-shot cocktail4 shot4 right shaker1 l2 l1)
 ; cost = 14 (unit cost)
-
 (empty-shaker right shaker1 cocktail4 l1 l0)
 (clean-shaker right left shaker1)
 (grasp left shot6)
@@ -72,4 +68,3 @@
 (shake cocktail5 ingredient2 ingredient3 shaker1 right left)
 (pour-shaker-to-shot cocktail5 shot5 right shaker1 l2 l1)
 ; cost = 13 (unit cost)
-

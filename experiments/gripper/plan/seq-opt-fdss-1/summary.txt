@@ -99,3 +99,23 @@ Problem Size: 2, Problem Index: 1 - Success
 Planning Time: 0.1548 seconds
 
 Average planning time for problem size 2 (successful only): 0.1548 seconds
+Problem Size: 3, Problem Index: 1 - Success
+Planning Time: 0.3268 seconds
+
+Average planning time for problem size 3 (successful only): 0.3268 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.2028 seconds
+
+Average planning time for problem size 2 (successful only): 0.2028 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.1973 seconds
+
+Average planning time for problem size 2 (successful only): 0.1973 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.1229 seconds
+
+Average planning time for problem size 2 (successful only): 0.1229 seconds
+Problem Size: 2, Problem Index: 1 - Success
+Planning Time: 0.2711 seconds
+
+Average planning time for problem size 2 (successful only): 0.2711 seconds

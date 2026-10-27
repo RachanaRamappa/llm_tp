@@ -24,9 +24,39 @@ def load_config():
 
 _config = load_config()
 
-DEFAULT_BASE_URL = os.getenv("LLM_BASE_URL", _config.get("LLM_BASE_URL", "https://api.groq.com/openai/v1"))
-DEFAULT_API_KEY = os.getenv("LLM_API_KEY", os.getenv("GROQ_API_KEY", _config.get("LLM_API_KEY", _config.get("GROQ_API_KEY", ""))))
-DEFAULT_MODEL = os.getenv("LLM_MODEL", _config.get("LLM_MODEL", "qwen/qwen3.8-27b"))
+# Multi-backend configurations
+OLLAMA_BASE_URL = _config.get("OLLAMA_BASE_URL") or os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1")
+OLLAMA_API_KEY = _config.get("OLLAMA_API_KEY") or os.getenv("OLLAMA_API_KEY", "ollama")
+OLLAMA_MODEL = _config.get("OLLAMA_MODEL") or os.getenv("OLLAMA_MODEL", "qwen2.5")
+
+VLLM_BASE_URL = _config.get("VLLM_BASE_URL") or os.getenv("VLLM_BASE_URL", "http://localhost:8000/v1")
+VLLM_API_KEY = _config.get("VLLM_API_KEY") or os.getenv("VLLM_API_KEY", "local-key")
+VLLM_MODEL = _config.get("VLLM_MODEL") or os.getenv("VLLM_MODEL", "Qwen/Qwen3-32B")
+
+GROQ_BASE_URL = _config.get("GROQ_BASE_URL") or _config.get("LLM_BASE_URL") or os.getenv("LLM_BASE_URL", "https://api.groq.com/openai/v1")
+GROQ_API_KEY = _config.get("GROQ_API_KEY") or _config.get("LLM_API_KEY") or os.getenv("LLM_API_KEY", os.getenv("GROQ_API_KEY", ""))
+GROQ_MODEL = _config.get("GROQ_MODEL") or _config.get("LLM_MODEL") or os.getenv("LLM_MODEL", "qwen/qwen3.8-27b")
+
+DEFAULT_BASE_URL = GROQ_BASE_URL
+DEFAULT_API_KEY = GROQ_API_KEY
+DEFAULT_MODEL = GROQ_MODEL
+
+_active_backend = None
+_active_base_url = None
+
+
+def set_active_backend(backend):
+    global _active_backend
+    _active_backend = backend.lower() if backend else None
+
+
+def get_active_backend():
+    return _active_backend
+
+
+def set_active_base_url(url):
+    global _active_base_url
+    _active_base_url = url
 
 
 def clean_llm_content(content):
@@ -61,16 +91,53 @@ def get_session_completion(
     temperature=0.0,
     logprobs=False,
     top_logprobs=None,
+    backend=None,
+    base_url=None,
+    api_key=None,
 ):
-    base_url = os.getenv("LLM_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
-    api_key = os.getenv("LLM_API_KEY", os.getenv("GROQ_API_KEY", DEFAULT_API_KEY))
-    target_model = model or os.getenv("LLM_MODEL", DEFAULT_MODEL)
+    selected_backend = (backend or _active_backend or "").lower()
+    target_model = model
 
-    is_groq = "groq.com" in base_url.lower()
+    # Check model prefixes
+    if target_model and target_model.startswith("ollama/"):
+        selected_backend = "ollama"
+        target_model = target_model[len("ollama/"):]
+    elif target_model and target_model.startswith("vllm/"):
+        selected_backend = "vllm"
+        target_model = target_model[len("vllm/"):]
+    elif target_model and target_model.startswith("groq/"):
+        selected_backend = "groq"
+        target_model = target_model[len("groq/"):]
+
+    # Resolve endpoint, key, and model according to backend
+    if selected_backend == "ollama":
+        eff_base_url = (base_url or _active_base_url or OLLAMA_BASE_URL).rstrip("/")
+        eff_api_key = api_key or OLLAMA_API_KEY
+        target_model = target_model or OLLAMA_MODEL
+    elif selected_backend == "vllm":
+        eff_base_url = (base_url or _active_base_url or VLLM_BASE_URL).rstrip("/")
+        eff_api_key = api_key or VLLM_API_KEY
+        target_model = target_model or VLLM_MODEL
+    else:
+        eff_base_url = (base_url or _active_base_url or DEFAULT_BASE_URL).rstrip("/")
+        eff_api_key = api_key or DEFAULT_API_KEY
+        target_model = target_model or DEFAULT_MODEL
+
+    is_groq = "groq.com" in eff_base_url.lower()
+
+    # Map OpenAI / other model names to the configured Groq model if on Groq
+    _OPENAI_ALIASES = {
+        "gpt-4o", "gpt-4o-mini", "gpt-4", "gpt-4-turbo",
+        "gpt-3.5-turbo", "gpt-3.5-turbo-16k", "o1", "o1-mini",
+    }
+    if is_groq and target_model in _OPENAI_ALIASES:
+        print(f"[INFO] Model '{target_model}' is not available on Groq. "
+              f"Falling back to configured model: {DEFAULT_MODEL}")
+        target_model = DEFAULT_MODEL
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_key}",
+        "Authorization": f"Bearer {eff_api_key}",
     }
 
     def fetch_completion(messages, try_logprobs=logprobs):
@@ -80,24 +147,47 @@ def get_session_completion(
             "max_tokens": max_tokens,
             "temperature": temperature,
         }
-        # Groq rejects logprobs parameter with HTTP 400
-        if try_logprobs and not is_groq:
+        # Groq and Ollama reject or don't support logprobs
+        if try_logprobs and not is_groq and selected_backend != "ollama":
             payload["logprobs"] = True
             if top_logprobs is not None:
                 payload["top_logprobs"] = top_logprobs
 
+        # Allow longer timeout (600s) for local models (Ollama / vLLM) on Mac CPU/MPS
+        request_timeout = 600 if (selected_backend in ["ollama", "vllm"] or "localhost" in eff_base_url or "127.0.0.1" in eff_base_url) else 180
+
         for attempt in range(6):
-            response = requests.post(
-                f"{base_url}/chat/completions",
-                headers=headers,
-                json=payload,
-                timeout=180,
-            )
+            try:
+                response = requests.post(
+                    f"{eff_base_url}/chat/completions",
+                    headers=headers,
+                    json=payload,
+                    timeout=request_timeout,
+                )
+            except requests.exceptions.ConnectionError as ce:
+                if "11434" in eff_base_url or selected_backend == "ollama":
+                    raise ConnectionError(
+                        f"\n[ERROR] Could not connect to Ollama at {eff_base_url}.\n"
+                        f"Make sure Ollama is installed and running (e.g. run 'ollama serve' or start the Ollama app)."
+                    ) from ce
+                elif "8000" in eff_base_url or selected_backend == "vllm":
+                    raise ConnectionError(
+                        f"\n[ERROR] Could not connect to vLLM at {eff_base_url}.\n"
+                        f"Make sure your vLLM server is running (e.g. run qwen3-vllm-offline/start_vllm.sh)."
+                    ) from ce
+                else:
+                    raise ce
 
             # If server returned 400 because of logprobs, retry once without logprobs
             if response.status_code == 400 and try_logprobs:
                 if "logprobs" in response.text.lower():
                     return fetch_completion(messages, try_logprobs=False)
+
+            # Retry on 401 (transient auth hiccup) — max 3 attempts
+            if response.status_code == 401 and attempt < 3:
+                print(f"[WARN] 401 Unauthorized (attempt {attempt+1}/3), retrying in 3s...")
+                time.sleep(3.0)
+                continue
 
             # If rate limited (429), wait and retry
             if response.status_code == 429:
@@ -117,6 +207,17 @@ def get_session_completion(
                 wait_time = max(2.5, min(wait_time, 15.0))
                 time.sleep(wait_time)
                 continue
+
+            if response.status_code == 404:
+                err_msg = ""
+                try:
+                    err_msg = response.json().get("error", {}).get("message", "")
+                except Exception:
+                    pass
+                raise ValueError(
+                    f"Model '{target_model}' not found on {eff_base_url}. "
+                    f"Details: {err_msg or response.text}"
+                )
 
             response.raise_for_status()
             return response.json()

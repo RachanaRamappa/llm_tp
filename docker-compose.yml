@@ -1,6 +1,23 @@
 version: '3.8'
 
+# ==============================================================================
+# Neuro-Symbolic Task Planning — Docker Compose for Offline A100
+# ==============================================================================
+# Usage:
+#   docker compose up                     → Start vLLM server only
+#   docker compose up vllm-server         → Start vLLM server only
+#   docker compose run planner mcts       → Run MCTS-LLM on all 3 domains
+#   docker compose run planner symbolic   → Run Symbolic-LLM on all 3 domains
+#   docker compose run planner run-all    → Run everything on all 3 domains
+#   docker compose run planner validate   → Validate all plans
+#   docker compose run planner bash       → Interactive shell
+# ==============================================================================
+
 services:
+
+  # ============================================================
+  # vLLM Server — Serves Qwen3-32B on the GPU
+  # ============================================================
   vllm-server:
     image: llm-task-planner:latest
     container_name: vllm-server
@@ -18,14 +35,16 @@ services:
       - "8000:8000"
 
     volumes:
-      - model_cache:/model_cache
+      # Mount pre-downloaded model weights
+      - ${MODEL_DIR:-./model_cache}:/model_cache:ro
 
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - CUDA_VISIBLE_DEVICES=0
-      - VLLM_WORKER_MULTIPROC_METHOD=spawn
-      - TRANSFORMERS_CACHE=/model_cache/huggingface
-      - TORCH_HOME=/model_cache/torch
+      - MODEL_PATH=${MODEL_PATH:-/model_cache/Qwen3-32B}
+      - LLM_API_KEY=${LLM_API_KEY:-local-key}
+      - MAX_MODEL_LEN=${MAX_MODEL_LEN:-16384}
+      - GPU_MEM_UTIL=${GPU_MEM_UTIL:-0.90}
 
     shm_size: 16gb
     restart: unless-stopped
@@ -34,37 +53,33 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:8000/v1/models"]
       interval: 15s
       timeout: 10s
-      retries: 20
-      start_period: 120s
+      retries: 40
+      start_period: 180s
 
-  mcts-planner:
+  # ============================================================
+  # Planner — Runs experiments against the vLLM server
+  # ============================================================
+  planner:
     image: llm-task-planner:latest
-    container_name: mcts-planner
-    entrypoint: ["/app/bin/entrypoint.sh", "mcts"]
+    container_name: planner
 
     depends_on:
       vllm-server:
         condition: service_healthy
 
     volumes:
-      - ./experiments:/app/experiments
-      - ./scripts:/app/scripts
-      - ./domains:/app/domains
-      - ./prompts:/app/prompts
-      - ./utils:/app/utils
+      # Mount experiments directory so results persist on host
+      - ./results:/app/experiments
 
     environment:
       - LLM_BASE_URL=http://vllm-server:8000/v1
-      - LLM_API_KEY=local-key
-      - LLM_MODEL=Qwen/Qwen3-32B
-      - MODEL_NAME=Qwen/Qwen3-32B
-      - DOMAIN=${DOMAIN:-barman}
+      - LLM_API_KEY=${LLM_API_KEY:-local-key}
+      - MODEL_NAME=${MODEL_NAME:-Qwen/Qwen3-32B}
+      - FD_PATH=/opt/downward/fast-downward.py
+      # Customize domains / sizes via env vars
+      - DOMAIN=${DOMAIN:-barman blocksworld gripper}
+      - SIZES=${SIZES:-2 3 4 5 6 7 8 9 10}
       - NS=${NS:-3 4 5}
-      - SIZES=${SIZES:-2 3 4 5}
 
     stdin_open: true
     tty: true
-
-volumes:
-  model_cache:
-    driver: local

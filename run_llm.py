@@ -1,7 +1,11 @@
 import sys
 import os
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.append(BASE_DIR)
+current_dir = os.path.abspath(os.path.dirname(__file__))
+if os.path.basename(current_dir) == "scripts":
+    BASE_DIR = os.path.abspath(os.path.join(current_dir, ".."))
+else:
+    BASE_DIR = current_dir
+sys.path.insert(0, BASE_DIR)
 
 import time
 import symbolic as sym

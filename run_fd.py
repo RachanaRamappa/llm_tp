@@ -1,6 +1,15 @@
 import os
-import symbolic as sym
+import sys
 import argparse
+
+current_dir = os.path.abspath(os.path.dirname(__file__))
+if os.path.basename(current_dir) == "scripts":
+    BASE_DIR = os.path.abspath(os.path.join(current_dir, ".."))
+else:
+    BASE_DIR = current_dir
+sys.path.insert(0, BASE_DIR)
+
+import symbolic as sym
 
 
 # Main function to run planner and calculate average planning time for each problem size
@@ -11,16 +20,16 @@ def run_fd(domain, planner, p_size, p_idx, path):
     print(f"Domain {domain}, using planner {planner}")
 
     # Create directory for results if it does not exist
-    results_dir = f"../experiments/{domain}/plan/{planner}"
+    results_dir = os.path.join(BASE_DIR, f"experiments/{domain}/plan/{planner}")
     os.makedirs(results_dir, exist_ok=True)
 
     with open(os.path.join(results_dir, "summary.txt"), "a") as summary_file:
         for prob_size in p_size:
             for prob_idx in p_idx:
-                domain_f = f"../domains/domain_{domain}.pddl"
-                problem_f = f"../experiments/{domain}/problem/{domain}{prob_size}_{prob_idx}.pddl"
-                fd_sas_f = f"../experiments/{domain}/plan/{planner}/{domain}{prob_size}_{prob_idx}.pddl.sas"
-                fd_plan_f = f"../experiments/{domain}/plan/{planner}/{domain}{prob_size}_{prob_idx}.plan"
+                domain_f = os.path.join(BASE_DIR, f"domains/domain_{domain}.pddl")
+                problem_f = os.path.join(BASE_DIR, f"experiments/{domain}/problem/{domain}{prob_size}_{prob_idx}.pddl")
+                fd_sas_f = os.path.join(BASE_DIR, f"experiments/{domain}/plan/{planner}/{domain}{prob_size}_{prob_idx}.pddl.sas")
+                fd_plan_f = os.path.join(BASE_DIR, f"experiments/{domain}/plan/{planner}/{domain}{prob_size}_{prob_idx}.plan")
                 success, plan, output, planning_time = sym.fd_planner(fd_plan_f, fd_sas_f, domain_f, problem_f, planner, path)
 
                 if success:
@@ -65,7 +74,7 @@ def main():
     parser.add_argument("--planner", type=str, choices=["seq-opt-fdss-1", "seq-sat-lama-2011"], default="seq-opt-fdss-1", help="Fast Downward planner configuration")
     parser.add_argument("--sizes", type=int, nargs="+", default=list(range(3, 11)),
                         help="Number of objects (e.g. --sizes 2 3 4 5 6 7 8 9 10)")
-    default_fd = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../downward/fast-downward.py"))
+    default_fd = os.getenv("FD_PATH", os.path.abspath(os.path.join(BASE_DIR, "../downward/fast-downward.py")))
     parser.add_argument("--path", type=str, default=default_fd if os.path.isfile(default_fd) else None, help="Path to fast-downward.py")
     args = parser.parse_args()
     path = args.path or default_fd
