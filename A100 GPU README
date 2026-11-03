@@ -1,0 +1,51 @@
+3. How to Access and Run the Container on the A100 Server (Step-by-Step)
+Once those files are placed on the A100 server, your guide runs the following commands:
+
+Step 1: Load the Docker image (No internet required)
+bash
+docker load < llm-task-planner-image.tar.gz
+Docker unpacks the image locally. Running docker images will now show llm-task-planner:latest.
+
+Step 2: Start the vLLM Server on the A100 GPU
+bash
+docker run --gpus all -d \
+  --name vllm-server \
+  -p 8000:8000 \
+  --shm-size 16g \
+  -v /path/to/model_cache/Qwen3-32B:/model_cache/Qwen3-32B:ro \
+  -e MODEL_PATH=/model_cache/Qwen3-32B \
+  llm-task-planner:latest serve
+vLLM loads the model directly onto the A100 GPU memory and serves an OpenAI-compatible API locally on port 8000.
+
+Step 3: Access the Container Interactively (Interactive Shell)
+To enter inside the container and run your experiments:
+
+bash
+docker run --rm -it --gpus all --network host \
+  -v $(pwd)/results:/app/experiments \
+  llm-task-planner:latest bash
+You are now inside the container! You have immediate access to:
+
+/app/scripts/run_subgoal.py (Symbolic-LLM and MCTS-LLM)
+/opt/downward/fast-downward.py (Fast Downward planner)
+/opt/VAL/bin/Validate (VAL plan validator)
+Step 4: Run Experiments Inside the Container
+Inside that container shell, simply run:
+
+bash
+# Run Symbolic-LLM on Barman domain:
+python scripts/run_subgoal.py \
+    --model Qwen/Qwen3-32B \
+    --backend vllm \
+    --domain barman \
+    --subgoal_planner symbolic-llm \
+    --sizes 2 3 4 5
+# Or run all planners on all domains automatically:
+/app/bin/entrypoint.sh run-all
+📁 Your Project Already Has This Script Ready:
+Your project already contains an automated script for this exact offline A100 workflow:
+📄 
+
+export_for_server.sh
+
+Running ./export_for_server.sh automatically packages the .tar.gz and generates a server_run.sh script ready for your guide!
