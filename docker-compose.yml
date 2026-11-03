@@ -19,7 +19,7 @@ services:
   # vLLM Server — Serves Qwen3-32B on the GPU
   # ============================================================
   vllm-server:
-    image: llm-task-planner:latest
+    image: ${DOCKER_IMAGE:-ghcr.io/rachanaramappa/llm_tp:latest}
     container_name: vllm-server
     entrypoint: ["/app/bin/entrypoint.sh", "serve"]
 
@@ -60,7 +60,7 @@ services:
   # Planner — Runs experiments against the vLLM server
   # ============================================================
   planner:
-    image: llm-task-planner:latest
+    image: ${DOCKER_IMAGE:-ghcr.io/rachanaramappa/llm_tp:latest}
     container_name: planner
 
     depends_on:

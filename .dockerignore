@@ -2,6 +2,8 @@
 .git
 .github
 .gitignore
+**/.git
+**/.git/**
 
 # IDE
 .idea
@@ -20,6 +22,8 @@ __pycache__
 .coverage
 htmlcov
 .cache
+**/__pycache__
+**/*.pyc
 
 # Virtual envs (DO NOT include in Docker image)
 .env
@@ -28,6 +32,8 @@ venv/
 env/
 .env.local
 .env.*.local
+**/.venv
+**/.venv/**
 
 # OS files
 .DS_Store
@@ -51,7 +57,7 @@ build
 # Node
 node_modules
 
-# Exported data (don't include in image)
+# Exported data & weights (mount at runtime)
 export/
 model_cache/
 results/

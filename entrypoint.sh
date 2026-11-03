@@ -41,7 +41,7 @@ case "$COMMAND" in
         echo "Model: ${MODEL_PATH:-Qwen/Qwen3-32B}"
         echo "Port: 8000"
 
-        python3.11 -m vllm.entrypoints.openai.api_server \
+        python3 -m vllm.entrypoints.openai.api_server \
             --model "${MODEL_PATH:-Qwen/Qwen3-32B}" \
             --served-model-name "Qwen/Qwen3-32B" \
             --host 0.0.0.0 \
@@ -74,7 +74,7 @@ case "$COMMAND" in
 
             cd /app
 
-            python3.11 run_subgoal.py \
+            python3 run_subgoal.py \
                 --model "${LLM_MODEL}" \
                 --backend vllm \
                 --domain "$domain" \
@@ -111,7 +111,7 @@ case "$COMMAND" in
 
             cd /app
 
-            python3.11 run_subgoal.py \
+            python3 run_subgoal.py \
                 --model "${LLM_MODEL}" \
                 --backend vllm \
                 --domain "$domain" \
@@ -142,7 +142,7 @@ case "$COMMAND" in
 
             cd /app
 
-            python3.11 run_fd.py \
+            python3 run_fd.py \
                 --domain "$domain" \
                 --planner "${FD_PLANNER:-seq-opt-fdss-1}" \
                 --sizes ${SIZES:-2 3 4 5 6 7 8 9 10} \
@@ -179,7 +179,7 @@ case "$COMMAND" in
             # --- Fast Downward Baseline ---
             echo ""
             echo ">>> [1/3] Fast Downward Baseline: $domain"
-            python3.11 run_fd.py \
+            python3 run_fd.py \
                 --domain "$domain" \
                 --planner "${FD_PLANNER:-seq-opt-fdss-1}" \
                 --sizes ${SIZES:-2 3 4 5 6 7 8 9 10} \
@@ -189,7 +189,7 @@ case "$COMMAND" in
             # --- Symbolic-LLM ---
             echo ""
             echo ">>> [2/3] Symbolic-LLM: $domain"
-            python3.11 run_subgoal.py \
+            python3 run_subgoal.py \
                 --model "${LLM_MODEL}" \
                 --backend vllm \
                 --domain "$domain" \
@@ -203,7 +203,7 @@ case "$COMMAND" in
             # --- MCTS-LLM ---
             echo ""
             echo ">>> [3/3] MCTS-LLM: $domain"
-            python3.11 run_subgoal.py \
+            python3 run_subgoal.py \
                 --model "${LLM_MODEL}" \
                 --backend vllm \
                 --domain "$domain" \
@@ -220,7 +220,7 @@ case "$COMMAND" in
         echo "  VALIDATING ALL PLANS"
         echo "########################################################"
         cd /app
-        python3.11 validate_plans.py || echo "[WARN] Validation encountered errors"
+        python3 validate_plans.py || echo "[WARN] Validation encountered errors"
 
         echo ""
         echo "========================================"
@@ -235,7 +235,7 @@ case "$COMMAND" in
     # ==================================================================
     validate)
         cd /app
-        python3.11 validate_plans.py
+        python3 validate_plans.py
         ;;
 
     # ==================================================================
@@ -245,8 +245,8 @@ case "$COMMAND" in
         exec /bin/bash "${@:2}"
         ;;
 
-    python|python3|python3.11)
-        exec python3.11 "${@:2}"
+    python|python3|python3)
+        exec python3 "${@:2}"
         ;;
 
     *)
@@ -261,6 +261,6 @@ case "$COMMAND" in
         echo "  validate     - Validate all generated plans"
         echo "  bash         - Open interactive shell"
         echo ""
-        exec python3.11 "$COMMAND" "${@:2}"
+        exec python3 "$COMMAND" "${@:2}"
         ;;
 esac
