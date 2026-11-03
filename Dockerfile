@@ -32,6 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     wget \
     graphviz \
+    python3-dev \
     libopenblas-dev \
     liblapack-dev \
     libgmp-dev \
