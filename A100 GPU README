@@ -44,6 +44,11 @@ python scripts/run_subgoal.py \
 /app/bin/entrypoint.sh run-all
 📁 Your Project Already Has This Script Ready:
 Your project already contains an automated script for this exact offline A100 workflow:
+
+
+"docker load < llm-tp-laptop.tar.gz
+docker run -d --name llm-tp llm-tp-laptop:latest tail -f /dev/null"----RUN AS THE FILE REACHES THE SYSTEM
+
 📄 
 
 export_for_server.sh
